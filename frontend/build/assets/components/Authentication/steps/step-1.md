@@ -1,0 +1,1 @@
+Start with the design mock. What you see below is what you will build eventually as you follow through the steps.

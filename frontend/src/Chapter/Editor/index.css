@@ -1,0 +1,20 @@
+.gutter {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=);
+  height: 5rem;
+  cursor: col-resize;
+  position: relative;
+  top: 40%;
+}
+
+.reflex-container.vertical {
+  height: 80vh;
+}
+
+.left-pane {
+  background: #151515;
+  height: 100%;
+}
+
+.sp-layout {
+  position: inherit;
+}
