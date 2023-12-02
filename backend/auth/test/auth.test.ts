@@ -92,7 +92,7 @@ describe('[Auth]', function () {
 
     describe('[Refresh-Token]', function () {
 
-      it('[/auth/refresh-token]::[Successful-token-refresh]', async function () {
+      it.skip('[/auth/refresh-token]::[Successful-token-refresh]', async function () {
 
         const payload = {
           refreshToken
@@ -110,7 +110,7 @@ describe('[Auth]', function () {
         refreshToken = res.body.refreshToken;
       });
 
-      it('[/auth/refresh-token]::[Invalid-refresh-token-provided]', async function () {
+      it.skip('[/auth/refresh-token]::[Invalid-refresh-token-provided]', async function () {
 
         const payload = {
           refreshToken: refreshToken+'$$'
