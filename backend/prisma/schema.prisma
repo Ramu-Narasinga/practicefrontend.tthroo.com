@@ -7,30 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Course {
-  id          Int     @id @default(autoincrement())
-  title       String
-  description String?
-  units       Unit[]
-}
-
-model Unit {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String?
-  courseId    Int
-  chapters    Chapter[]
-  course      Course    @relation(fields: [courseId], references: [id])
-}
-
 model Chapter {
   id              Int           @id @default(autoincrement())
   title           String
   description     String
-  unitId          Int
   additionalfiles Json?
   img             String?       @db.VarChar
-  unit            Unit          @relation(fields: [unitId], references: [id])
   steps           Step[]
   userChapters    UserChapter[]
 }

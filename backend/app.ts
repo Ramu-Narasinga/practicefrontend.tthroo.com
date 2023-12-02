@@ -9,6 +9,7 @@ import {CommonRoutesConfig} from './common/common.routes.config';
 import { AuthRoutes } from './auth/auth.routes.config';
 import helmet from 'helmet';
 import loadEnv from './common/scripts/loadenv';
+import { ChapterRoutes } from './chapter/chapter.routes.config';
 
 loadEnv();
 
@@ -48,6 +49,7 @@ if (!process.env.DEBUG) {
 app.use(expressWinston.logger(loggerOptions));
 
 routes.push(new AuthRoutes(app));
+routes.push(new ChapterRoutes(app));
 
 // this is a simple route to make sure everything is working properly
 const runningMessage = `Server running at http://localhost:${port}`;
