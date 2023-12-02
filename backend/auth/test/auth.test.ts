@@ -125,7 +125,7 @@ describe('[Auth]', function () {
         expect(res.body.errors[0]).to.equal("Invalid refresh token");
       });
 
-      it.skip('[/auth/refresh-token]::[Missing-jwt-header-token]', async function () {
+      it('[/auth/refresh-token]::[Missing-jwt-header-token]', async function () {
 
         const payload = {
           refreshToken: refreshToken+'$$'
@@ -142,7 +142,7 @@ describe('[Auth]', function () {
     });
 
     describe('[Signup]', function () {
-      it('[/auth/signup]::[Existing-User-Signup]', async function() {
+      it.skip('[/auth/signup]::[Existing-User-Signup]', async function() {
 
         const payload = {
           "email": "test@gmail.com",
@@ -158,7 +158,7 @@ describe('[Auth]', function () {
         expect(res.body.errors[0]).to.equal("User already exists, try to sign in");
       });
 
-      it.skip('[/auth/signup]::[Missing-Password]', async function() {
+      it('[/auth/signup]::[Missing-Password]', async function() {
 
         const payload = {
           "email": "test@gmail.com",
@@ -176,7 +176,7 @@ describe('[Auth]', function () {
         expect(res.body.errors[1].param).to.equal("confirmPassword");
       });
 
-      it.skip('[/auth/signup]::[Invalid-Email]', async function() {
+      it('[/auth/signup]::[Invalid-Email]', async function() {
 
         const payload = {
           "email": "test@",
