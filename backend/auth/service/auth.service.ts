@@ -2,13 +2,9 @@ import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import debug from 'debug';
 import { LoginUserDto } from "../dto/login.user.dto";
+import loadEnv from "../../common/scripts/loadenv";
 
-import dotenv from 'dotenv';
-
-const dotenvResult = dotenv.config();
-if (dotenvResult.error) {
-    throw dotenvResult.error;
-}
+loadEnv();
 
 const tokenExpiry = process.env.tokenExpiry;
 // @ts-expect-error

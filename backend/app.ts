@@ -1,11 +1,4 @@
 import debug from 'debug';
-import dotenv from 'dotenv';
-
-const dotenvResult = dotenv.config();
-if (dotenvResult.error) {
-  console.log("dotenv failed to env");
-}
-
 import express from 'express';
 import * as http from 'http';
 
@@ -15,6 +8,9 @@ import cors from 'cors';
 import {CommonRoutesConfig} from './common/common.routes.config';
 import { AuthRoutes } from './auth/auth.routes.config';
 import helmet from 'helmet';
+import loadEnv from './common/scripts/loadenv';
+
+loadEnv();
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);

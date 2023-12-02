@@ -5,13 +5,9 @@ import express from 'express';
 import BodyValidationMiddleware from '../common/middleware/body.validation.middleware';
 import { body } from 'express-validator';
 import jwtMiddleware from './middleware/jwt.middleware';
+import loadEnv from '../common/scripts/loadenv';
 
-import dotenv from 'dotenv';
-
-const dotenvResult = dotenv.config();
-if (dotenvResult.error) {
-    throw dotenvResult.error;
-}
+loadEnv();
 
 export class AuthRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
