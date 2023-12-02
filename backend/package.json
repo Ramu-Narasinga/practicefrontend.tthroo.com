@@ -6,6 +6,7 @@
   "scripts": {
     "start": "tsc && node --unhandled-rejections=strict ./dist/app.js",
     "debug": "export DEBUG=* && npm run start",
+    "build": "npx prisma db pull && npx prisma generate",
     "test": "mocha -r ts-node/register '**/*.test.ts' --unhandled-rejections=strict",
     "test-debug": "export DEBUG=* && npm test"
   },

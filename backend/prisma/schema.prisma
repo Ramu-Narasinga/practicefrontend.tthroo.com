@@ -29,6 +29,7 @@ model Chapter {
   description     String
   unitId          Int
   additionalfiles Json?
+  img             String?       @db.VarChar
   unit            Unit          @relation(fields: [unitId], references: [id])
   steps           Step[]
   userChapters    UserChapter[]
