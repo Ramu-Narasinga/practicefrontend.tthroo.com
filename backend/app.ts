@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 const dotenvResult = dotenv.config();
 if (dotenvResult.error) {
-    throw dotenvResult.error;
+  console.log("dotenv failed to env");
 }
 
 import express from 'express';
