@@ -101,7 +101,6 @@ describe('[Auth]', function () {
           .post('/auth/refresh-token')
           .set({ Authorization: `Bearer ${accessToken}` })
           .send(payload);
-
         expect(res.status).to.equal(201);
         expect(res.body).not.to.be.empty;
         expect(res.body).to.be.an('object');
@@ -120,7 +119,6 @@ describe('[Auth]', function () {
           .post('/auth/refresh-token')
           .set({ Authorization: `Bearer ${accessToken}` })
           .send(payload);
-
         expect(res.status).to.equal(400);
         expect(res.body.errors).to.be.an('array');
         expect(res.body.errors).to.have.length(1);

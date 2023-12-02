@@ -12,7 +12,7 @@ if (dotenvResult.error) {
 
 const tokenExpiry = process.env.tokenExpiry;
 // @ts-expect-error
-const jwtSecret: string = process.env.JWT_SECRET;
+const jwtSecret: string = process.env.jwtSecret;
 
 const log: debug.IDebugger = debug("app:auth-service");
 class AuthService {

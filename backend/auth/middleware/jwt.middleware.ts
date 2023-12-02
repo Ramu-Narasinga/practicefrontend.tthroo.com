@@ -6,7 +6,7 @@ import usersService from '../../users/services/users.service';
 import authService from '../service/auth.service';
 
 // @ts-expect-error
-const jwtSecret: string = process.env.JWT_SECRET;
+const jwtSecret: string = process.env.jwtSecret;
 
 class JwtMiddleware {
     verifyRefreshBodyField(
@@ -68,7 +68,7 @@ class JwtMiddleware {
                     next();
                 }
             } catch (err) {
-                return res.status(403).send();
+                return res.status(403).send({ errors: ['Missing jwt token'] });
             }
         } else {
             return res.status(401).send({ errors: ['Missing jwt token'] });
