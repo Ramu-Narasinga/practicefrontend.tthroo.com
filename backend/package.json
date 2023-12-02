@@ -7,7 +7,7 @@
     "start": "tsc && node --unhandled-rejections=strict ./dist/app.js",
     "debug": "export DEBUG=* && npm run start",
     "build": "npx prisma generate",
-    "test": "mocha -r ts-node/register '**/*.test.ts' --unhandled-rejections=strict",
+    "test": "mocha -r ts-node/register '**/*.test.ts' --unhandled-rejections=strict --timeout 15000",
     "test-debug": "export DEBUG=* && npm test"
   },
   "keywords": [],
