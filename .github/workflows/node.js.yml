@@ -33,3 +33,4 @@ jobs:
     - run: npm run test
       env:
         jwtSecret: ${{ secrets.jwtSecret }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
