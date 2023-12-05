@@ -6,7 +6,10 @@ import Steps from './Steps';
 import { ChapterType } from './types';
 import { getToken } from '../Shared/Utils';
 import { SandpackFiles } from '@codesandbox/sandpack-react/types';
+import { Sandpack } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import "./index.css";
+import Selector from './Steps/Selector';
 
 
 function Chapter() {
@@ -38,19 +41,25 @@ function Chapter() {
   return (
     <>
       <Header title={chapter.title} unit={`${chapter?.unit?.title} / `} unitId={chapter.unitId} />
-      <div className='block color-red md:hidden my-2'>*This editor works best on large screens</div>
-      <div className="flex flex-row gap-10">
-        <div className="w-1/4 flex flex-col gap-6">
-          <div className='flex flex-row justify-between items-center pl-6 pt-4'>
-            <div><h1 className='pl-2 text-xl'>Steps</h1></div>
-            {/* <p><a href="https://react.dev/learn/thinking-in-react">Thinking in react</a> guide is used to write the steps below</p> */}
-          </div>
-          <div className="sidebar-container overflow-y-scroll">
-            {chapter?.steps?.length > 0 && <Steps chapterTitle={chapter?.title} stepTitles={chapter?.steps} />}
-          </div>
+      <div className="flex flex-row bg-gray-100 h-full">
+        <div className="pt-4 w-1/4 sidebar-container overflow-y-scroll">
+          {chapter?.steps?.length > 0 && <Steps chapterTitle={chapter?.title} stepTitles={chapter?.steps} />}
+          {/* <Selector /> */}
         </div>
-        <div className="pt-4 w-3/4 pr-6">
-          {<ChapterEditor files={files && Object.keys(files).length > 0 ? files : {}} />}
+        <div className="w-3/4 h-full">
+          {/* {<ChapterEditor files={files && Object.keys(files).length > 0 ? files : {}} />} */}
+          <Sandpack 
+            template="react"
+            theme={sandpackDark}
+            options={{
+              wrapContent: true,
+              editorHeight: 'calc(100vh - 4rem)',
+              editorWidthPercentage: 60,
+              showTabs: true,
+              closableTabs: true,
+              showNavigator: true
+            }}
+          />
         </div>
       </div>
     </>

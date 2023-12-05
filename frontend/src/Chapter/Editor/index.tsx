@@ -65,9 +65,9 @@ function CustomEditor(props: ChapterEditorProps) {
         setSaving(false);
       }
     } catch (error: any) {
-      console.log(error);
+      console.log(typeof error);
       setSaving(false);
-      if (error.includes("Token expired")) {
+      if (error && error.includes && error.includes("Token expired")) {
         navigate('/login');
       }
     }
@@ -80,7 +80,7 @@ function CustomEditor(props: ChapterEditorProps) {
 
   return (
     <>
-      {<SavingLoader saving={saving} />}
+      {/* {<SavingLoader saving={saving} />}
       <ReflexContainer orientation="vertical">
 
         <ReflexElement 
@@ -119,16 +119,20 @@ function CustomEditor(props: ChapterEditorProps) {
           </div>
         </ReflexElement>
 
-      </ReflexContainer>
+      </ReflexContainer> */}
 
       {/* <SandpackFileExplorer />  */}
-      {/* <SandpackCodeEditor  
-          style={{ height: "80vh" }}
-          extensions={[autocompletion()]}
-          extensionsKeymap={completionKeymap as KeyBinding[]}
-          closableTabs={false}
-        /> */}
-      {/* <SandpackPreview style={{ height: "80vh" }}  /> */}
+      <div className='rounded-lg border border-neutral-200 bg-white divide-y divide-neutral-200'>
+        <SandpackCodeEditor  
+            style={{ height: "80vh" }}
+            extensions={[autocompletion()]}
+            extensionsKeymap={completionKeymap as KeyBinding[]}
+            closableTabs={false}
+          />
+      </div>
+      <div className='rounded-lg border border-neutral-200 bg-white divide-y divide-neutral-200'>
+        <SandpackPreview style={{ height: "80vh" }}  />
+      </div>
     </>
   )
 }
@@ -136,7 +140,7 @@ function CustomEditor(props: ChapterEditorProps) {
 function ChapterEditor(props: ChapterEditorProps) {
   
   return (
-    <div className="w-full">
+    <div className="">
       <SandpackProvider customSetup={{ dependencies: { "classnames": "latest" } }} theme="dark" template="react" files={props.files}>
         <SandpackLayout>
           <CustomEditor {...props} />

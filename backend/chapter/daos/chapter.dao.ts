@@ -20,6 +20,9 @@ class ChapterDao {
     return await this.prisma.chapter.findUnique({
       where: {
         id: chapterId,
+      },
+      include: {
+        steps: true
       }
     });
   }

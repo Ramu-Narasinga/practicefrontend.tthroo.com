@@ -5,10 +5,12 @@ import Markdown from 'react-markdown';
 import ModalImage from "react-modal-image";
 
 import "./index.css";
+import Selector from "./Selector";
 
 function Steps(props: { chapterTitle: string, stepTitles: StepType[] }) {
 
   const [steps, setSteps] = useState<StepType[]>([]);
+  const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
     const fetchSteps = async () => {
@@ -32,7 +34,36 @@ function Steps(props: { chapterTitle: string, stepTitles: StepType[] }) {
 
   return (
     <>
+      <Selector 
+        stepTitles={props.stepTitles.map(stepTitle => stepTitle.description)}
+        setActiveStep={setActiveStep}
+        activeStep={activeStep}
+      />
       {
+        <Markdown 
+        className="markdown"
+        components={{
+          p: ({ node, children }) => <p className="mb-4">{children}</p>,
+          h1: ({ node, children }) => <h1 className="text-3xl font-bold mb-4">{children}</h1>,
+          h2: ({ node, children }) => <h2 className="text-2xl font-bold mb-4">{children}</h2>,
+          h3: ({ node, children }) => <h3 className="text-xl font-bold mb-4">{children}</h3>,
+          h4: ({ node, children }) => <h4 className="text-lg font-bold mb-4">{children}</h4>,
+          h5: ({ node, children }) => <h5 className="text-base font-bold mb-4">{children}</h5>,
+          h6: ({ node, children }) => <h6 className="text-sm font-bold mb-4">{children}</h6>,
+          ul: ({ node, children }) => <ul className="list-disc pl-5 mb-4">{children}</ul>,
+          ol: ({ node, children }) => <ol className="list-decimal pl-5 mb-4">{children}</ol>,
+          li: ({ node, children }) => <li className="mb-2">{children}</li>,
+          strong: ({ node, children }) => <strong className="font-bold">{children}</strong>,
+          em: ({ node, children }) => <em className="italic">{children}</em>,
+          blockquote: ({ node, children }) => <blockquote className="border-l-4 border-gray-500 pl-4 italic">{children}</blockquote>,
+          code: ({ node, children }) => {
+            return <pre className="bg-gray-200 p-2 mb-4 overflow-auto"><code>{children}</code></pre>;
+          },
+          a: ({ node, children, href }) => <a href={href} className="text-blue-500 hover:underline">{children}</a>,
+        }}
+      >{steps[activeStep]?.description}</Markdown>
+      }
+      {/* {
         steps?.map(
           (step: StepType, index) => (
             <CollapsibleSidebar title={`${props.stepTitles[index].description}`} isOpen={index === 0}>
@@ -78,7 +109,7 @@ function Steps(props: { chapterTitle: string, stepTitles: StepType[] }) {
             </CollapsibleSidebar>
           )
         )
-      }
+      } */}
     </>
   )
 }

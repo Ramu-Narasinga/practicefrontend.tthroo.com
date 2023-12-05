@@ -11,7 +11,7 @@ function ChapterCard(props: { chapter: ChapterCardType }) {
     <div className="flex flex-col justify-between max-w-sm h-fit-content bg-white rounded-lg border border-gray-300 text-left">
       <div>
         <Link to={`/chapter/${chapter.id}`}>
-          <img src={require(`../../../assets/components/${chapter.title}/img.png`)} alt="chapter" />
+          <img src={`/assets/components/${chapter.title}/img.png`} alt="chapter" />
         </Link>
       </div>
       <div className="p-5">
