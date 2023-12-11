@@ -19,6 +19,7 @@ export class ChapterRoutes extends CommonRoutesConfig {
         );
 
         this.app.get('/chapter/:chapterId',
+          jwtMiddleware.validJWTNeeded,
           chapterController.getChapterById
         );
 

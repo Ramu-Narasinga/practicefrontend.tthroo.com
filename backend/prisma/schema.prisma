@@ -13,6 +13,7 @@ model Chapter {
   description     String
   additionalfiles Json?
   img             String?       @db.VarChar
+  unit            String?       @db.VarChar
   steps           Step[]
   userChapters    UserChapter[]
 }

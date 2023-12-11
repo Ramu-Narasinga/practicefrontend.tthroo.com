@@ -29,8 +29,8 @@ function Chapter() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setChapter(data);
-        setFiles({...data?.additionalfiles, ...data?.userChapter?.files});
+        setChapter(data.chapter);
+        setFiles({...data?.chapter?.additionalfiles, ...data?.files});
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, [chapterId]);
@@ -53,7 +53,9 @@ function Chapter() {
           {chapter?.steps?.length > 0 && <Steps chapterTitle={chapter?.title} stepTitles={chapter?.steps} />}
         </div>
         <div className="w-3/4 h-full">
-          {<ChapterEditor files={files && Object.keys(files).length > 0 ? files : {}} />}
+          {
+            <ChapterEditor files={files && Object.keys(files).length > 0 ? files : {}} />
+          }
         </div>
       </div>
     </>

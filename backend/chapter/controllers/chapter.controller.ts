@@ -7,9 +7,14 @@ class ChapterController {
 
   async getChapters(req: express.Request, res: express.Response) {
       try {
-        let chapters = await chapterService.getChapters();
-        log("fetched chapter successfully:");
-        res.status(200).send(chapters);
+        if (req.query.unit && typeof req.query.unit == "string") {
+          let unit: string = req.query.unit ?? '';
+          let chapters = await chapterService.getChapters(unit);
+          log("fetched chapter successfully:");
+          res.status(200).send(chapters);
+        } else {
+          throw new Error("Missing unit query param");
+        }
       } catch (err) {
         log("getChapter error: %O", err);
         return res.status(500).send();
@@ -19,14 +24,15 @@ class ChapterController {
   async getChapterById(req: express.Request, res: express.Response) {
     try {
       const chapterId = parseInt(req.params.chapterId);
-      let chapter = await chapterService.getChapterById(chapterId);
+      const { userId } = res.locals.jwt;
+      let chapter = await chapterService.getChapterById(chapterId, userId);
       log("fetched chapter successfully:");
 
-      if (!chapter) {
+      if (!chapter || chapter.length == 0) {
         return res.status(404).json({ error: 'Chapter not found' });
       }
 
-      res.status(200).send(chapter);
+      res.status(200).send(chapter[0]);
     } catch (err) {
       log("getChapter error: %O", err);
       return res.status(500).send();

@@ -17,18 +17,33 @@ class ChapterDao {
     this.prisma = prismaService.getPrismaClient();
   }
 
-  async getChapters() {
-    return await this.prisma.chapter.findMany();
+  async getChapters(unit: string) {
+    return await this.prisma.chapter.findMany({
+      where: {
+        unit
+      }
+    });
   }
 
-  async getChapterById(chapterId: number) {
-    return await this.prisma.chapter.findUnique({
+  async getChapterById(chapterId: number, userId: number) {
+    // return await this.prisma.chapter.findUnique({
+    //   where: {
+    //     id: chapterId,
+    //   },
+    //   include: {
+    //     steps: true,
+    //     userChapters: true
+    //   }
+    // });
+    return await this.prisma.userChapter.findMany({
       where: {
-        id: chapterId,
+        user_id: userId,
+        chapter_id: chapterId,
       },
       include: {
-        steps: true
-      }
+        // Include any related fields you want in the result
+        chapter: true,
+      },
     });
   }
 
