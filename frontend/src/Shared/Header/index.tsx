@@ -16,7 +16,7 @@ function Header(props: { title: string; unit?: string; unitId?: number }) {
 
   return (
     <div className="w-full bg-slate-50">
-      <div className="flex items-center justify-between bg-white h-16 px-4 sm:px-6 md:px-8">
+      <div className="flex items-center justify-between h-16 px-4 sm:px-6 md:px-8">
         <div className="flex items-center">
           <a href="https://tthroo.com"><img className="w-8 h-8" src={TThroo} alt="Logo" /></a>
           <div className="ml-2 flex">

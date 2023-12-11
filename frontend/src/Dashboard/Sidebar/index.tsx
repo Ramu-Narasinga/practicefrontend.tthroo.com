@@ -17,7 +17,6 @@ function Sidebar() {
       let firstCourse = data[0];
       if (firstCourse.units.length > 0) {
         let firstUnit = firstCourse.units[0];
-        console.log("triggered navigate");
         navigate(`/practice/unit/${firstUnit.id}`);
       }
     }

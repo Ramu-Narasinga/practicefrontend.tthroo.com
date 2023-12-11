@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TThroo from '../../assets/img/tthroo.svg';
 import { useNavigate } from 'react-router';
+import { setRefreshToken, setToken } from '../Utils';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -33,11 +34,12 @@ function Signup() {
     const userData = {
       email,
       password,
-      isVerified: false
+      isVerified: false,
+      confirmPassword
     };
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +49,8 @@ function Signup() {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token);
+        setToken(data.accessToken);
+        setRefreshToken(data.refreshToken);
         navigate('/practice');
       } else {
         const data = await response.json();

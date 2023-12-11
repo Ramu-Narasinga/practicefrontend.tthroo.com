@@ -23,6 +23,7 @@ import {
 } from 'react-reflex'
 
 import 'react-reflex/styles.css'
+import { toast } from 'react-hot-toast';
 
 interface ChapterEditorProps {
   files: SandpackFiles;
@@ -45,7 +46,7 @@ function CustomEditor(props: ChapterEditorProps) {
 
       setSaving(true);
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/user-chapter/save/${chapterId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/chapter/${chapterId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,6 +59,16 @@ function CustomEditor(props: ChapterEditorProps) {
         const data = await response.json();
         console.error(data.error);
         setSaving(false);
+        toast.error(
+          "Please login to save your progress.", 
+          {
+            style: {
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+            },
+          }
+        );
         if (data.error.includes("Token expired")) {
           navigate('/login');
         }
@@ -65,7 +76,6 @@ function CustomEditor(props: ChapterEditorProps) {
         setSaving(false);
       }
     } catch (error: any) {
-      console.log(typeof error);
       setSaving(false);
       if (error && error.includes && error.includes("Token expired")) {
         navigate('/login');
@@ -122,7 +132,7 @@ function CustomEditor(props: ChapterEditorProps) {
       </ReflexContainer> */}
 
       {/* <SandpackFileExplorer />  */}
-      <div className='rounded-lg border border-neutral-200 bg-white divide-y divide-neutral-200'>
+      {/* <div className='rounded-lg border border-neutral-200 bg-white divide-y divide-neutral-200'>
         <SandpackCodeEditor  
             style={{ height: "80vh" }}
             extensions={[autocompletion()]}
@@ -132,20 +142,41 @@ function CustomEditor(props: ChapterEditorProps) {
       </div>
       <div className='rounded-lg border border-neutral-200 bg-white divide-y divide-neutral-200'>
         <SandpackPreview style={{ height: "80vh" }}  />
-      </div>
+      </div> */}
+      <SandpackLayout>
+        <SandpackCodeEditor
+          style={{ height: "calc(100vh - 4rem)" }}
+          closableTabs={true}
+          showTabs={true}
+        />
+        <SandpackPreview
+          style={{ height: "calc(100vh - 4rem)" }}
+          showRefreshButton={true}
+          showNavigator={true}
+        />
+      </SandpackLayout>
     </>
   )
 }
 
 function ChapterEditor(props: ChapterEditorProps) {
+
+  
   
   return (
     <div className="">
-      <SandpackProvider customSetup={{ dependencies: { "classnames": "latest" } }} theme="dark" template="react" files={props.files}>
+      {/* <SandpackProvider customSetup={{ dependencies: { "classnames": "latest" } }} theme="dark" template="react" files={props.files}>
         <SandpackLayout>
           <CustomEditor {...props} />
         </SandpackLayout>
-      </SandpackProvider>
+      </SandpackProvider> */}
+      <SandpackProvider 
+        template="react" 
+        theme="dark"
+        files={props.files}
+      >
+        <CustomEditor {...props} />
+    </SandpackProvider>
     </div>
   );
 }

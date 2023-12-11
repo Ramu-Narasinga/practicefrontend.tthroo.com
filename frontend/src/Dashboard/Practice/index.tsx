@@ -3,44 +3,21 @@ import { useParams } from 'react-router-dom';
 import ChapterCard from './ChapterCard';
 import { ChapterCardType } from './types';
 import { SkeletonLoader } from './UnitChapters/SkeletonLoader';
+import UnitChapters from './UnitChapters';
 
-function UnitChapters() {
-  const [chapters, setChapters] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const { unitId } = useParams();
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${process.env.REACT_APP_API_URL}/chapters`)
-      .then((response) => response.json())
-      .then((data) => {
-        setChapters(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, [unitId]);
-
-  if (loading) {
-    return (
-      <SkeletonLoader />
-    )
-  }
+function Practice() {
+  const [unit, setUnit] = useState("uiComponents");
 
   return (
-    <div className="flex flex-col gap-10 mt-4 pl-6 md:pl-0">
-      <div className="flex flex-row gap-8 flex-wrap  px-4 md:px-8">
-        {chapters.map((chapter: ChapterCardType) => (
-          <ChapterCard key={chapter.id} chapter={chapter} />
-        ))}
-        {
-          chapters.length === 0 && <div className='text-black text-lg font-normal'>No chapters added yet.</div>
-        }
+    <>
+      <div className="flex items-center border-b border-solid border-gray-300 gap-10 h-12 px-4 sm:px-6 md:px-8 align-center">
+        <div className='text-sm' onClick={() => setUnit("uiComponents")}>UI Components</div>
+        <div className='text-sm' onClick={() => setUnit("landingPage")}>Landing Page</div>
+        <div className='text-sm' onClick={() => setUnit("dashboard")}>Dashboard</div>
       </div>
-    </div>
+      <UnitChapters unit={unit} />
+    </>
   );
 }
 
-export default UnitChapters;
+export default Practice;

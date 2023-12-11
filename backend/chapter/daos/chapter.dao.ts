@@ -4,6 +4,11 @@ import prismaService from "../../common/services/prisma.service";
 
 const log: debug.IDebugger = debug("app:chapter-dao");
 
+export type ChapterSave = {
+  files: string,
+  steps_completed: number
+}
+
 class ChapterDao {
   prisma: PrismaClient;
 
@@ -24,6 +29,22 @@ class ChapterDao {
       include: {
         steps: true
       }
+    });
+  }
+
+  async saveChapterById(chapterId: number, userId: number, data: ChapterSave) {
+    return await this.prisma.userChapter.upsert({
+      where: {
+        id: chapterId, // Provide the unique identifier for the existing record
+      },
+      update: {
+        ...data
+      },
+      create: {
+        user_id: userId,
+        chapter_id: chapterId,
+        ...data
+      },
     });
   }
 }

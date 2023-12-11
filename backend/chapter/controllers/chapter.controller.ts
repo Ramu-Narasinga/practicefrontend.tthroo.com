@@ -31,7 +31,26 @@ class ChapterController {
       log("getChapter error: %O", err);
       return res.status(500).send();
     }
-}
+  }
+
+  async saveChapterById(req: express.Request, res: express.Response) {
+    try {
+      const chapterId = parseInt(req.params.chapterId);
+      const { userId } = res.locals.jwt;
+      const {
+        files,
+        steps_completed
+      } = req.body;
+      
+      await chapterService.saveChapterById(chapterId, userId, { files, steps_completed });
+      log("saved chapter successfully:");
+
+      res.status(200).send();
+    } catch (err) {
+      log("getChapter error: %O", err);
+      return res.status(500).send();
+    }
+  }
 }
 
 export default new ChapterController();

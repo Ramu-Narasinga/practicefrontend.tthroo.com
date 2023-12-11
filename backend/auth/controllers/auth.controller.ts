@@ -9,7 +9,7 @@ const log: debug.IDebugger = debug("app:auth-controller");
 class AuthController {
   async createJWT(req: express.Request, res: express.Response) {
     try {
-      return res.status(201).send(authService.generateLoginResponse(req.body, res.locals));
+      return res.status(201).send(authService.generateLoginResponse(req.body));
     } catch (err) {
       log("createJWT error: %O", err);
       return res.status(500).send();
@@ -20,8 +20,8 @@ class AuthController {
     try {
       let createdUser = await usersService.createUser(req.body);
       log("createdUser:", createdUser);
-      res.locals.id = createdUser.id;
-      let loginRes = authService.generateLoginResponse(req.body, res.locals);
+      req.body.userId = createdUser.id;
+      let loginRes = authService.generateLoginResponse(req.body);
       res.status(200).send(loginRes);
     } catch (err) {
       log("createJWT error: %O", err);

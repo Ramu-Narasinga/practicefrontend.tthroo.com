@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import TThroo from '../../assets/img/tthroo.svg';
+import { setRefreshToken, setToken } from '../Utils';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +21,7 @@ function Login() {
     };
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,10 +31,9 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        // Store the JWT token in local storage or cookies for future requests
-        localStorage.setItem('token', data.token);
-        // Redirect to a dashboard or home page
-        window.location.href = '/practice'; // Replace with your desired route
+        setToken(data.accessToken);
+        setRefreshToken(data.refreshToken);
+        navigate('/practice');
       } else {
         const data = await response.json();
         setError(`Login failed: ${data.error}`)

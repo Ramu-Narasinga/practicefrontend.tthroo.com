@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { FaChevronUp, FaChevronDown, FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
+import { FaChevronUp, FaChevronDown, FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
 
 interface SelectorProps { 
   stepTitles: String[],
@@ -25,7 +25,7 @@ const Selector: React.FC<SelectorProps> = (props) => {
 
   return (
     <div className='flex flex-row items-center justify-center gap-3 px-2'>
-      <FaArrowAltCircleLeft className='cursor-pointer' onClick={() => handleStepClick(props.activeStep - 1)} />
+      <FaLongArrowAltLeft className='cursor-pointer' onClick={() => handleStepClick(props.activeStep - 1)} />
         <button 
           className="bg-white text-black py-2 px-3 shadow-md text-left relative flex-1"
           onClick={handleToggle}
@@ -41,7 +41,7 @@ const Selector: React.FC<SelectorProps> = (props) => {
           {
             showSteps &&
               <nav className='shadow-md w-full absolute left-0'>
-              <div className='my-3 overflow-auto bg-white'>
+              <div className='mt-3 overflow-auto bg-white'>
                 <ul className='m-0 p-0 pl-6 list-none relative'>
                   {
                     props.stepTitles.map((stepTitle, index) => 
@@ -70,7 +70,7 @@ const Selector: React.FC<SelectorProps> = (props) => {
             </nav>
           }
         </button>
-        <FaArrowAltCircleRight className='cursor-pointer' onClick={() => handleStepClick(props.activeStep + 1)} />
+        <FaLongArrowAltRight className='cursor-pointer' onClick={() => handleStepClick(props.activeStep + 1)} />
       </div>
   );
 };

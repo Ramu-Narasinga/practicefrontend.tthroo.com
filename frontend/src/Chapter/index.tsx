@@ -10,6 +10,7 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 import { sandpackDark } from "@codesandbox/sandpack-themes";
 import "./index.css";
 import Selector from './Steps/Selector';
+import { Toaster } from 'react-hot-toast';
 
 
 function Chapter() {
@@ -40,26 +41,19 @@ function Chapter() {
 
   return (
     <>
+      <div>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
+      </div>
       <Header title={chapter.title} unit={`${chapter?.unit?.title} / `} unitId={chapter.unitId} />
-      <div className="flex flex-row bg-gray-100 h-full">
+      <div className="flex flex-row bg-gray-100">
         <div className="pt-4 w-1/4 sidebar-container overflow-y-scroll">
           {chapter?.steps?.length > 0 && <Steps chapterTitle={chapter?.title} stepTitles={chapter?.steps} />}
-          {/* <Selector /> */}
         </div>
         <div className="w-3/4 h-full">
-          {/* {<ChapterEditor files={files && Object.keys(files).length > 0 ? files : {}} />} */}
-          <Sandpack 
-            template="react"
-            theme={sandpackDark}
-            options={{
-              wrapContent: true,
-              editorHeight: 'calc(100vh - 4rem)',
-              editorWidthPercentage: 60,
-              showTabs: true,
-              closableTabs: true,
-              showNavigator: true
-            }}
-          />
+          {<ChapterEditor files={files && Object.keys(files).length > 0 ? files : {}} />}
         </div>
       </div>
     </>

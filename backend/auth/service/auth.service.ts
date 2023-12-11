@@ -11,6 +11,11 @@ const tokenExpiry = process.env.tokenExpiry;
 const jwtSecret: string = process.env.jwtSecret;
 
 const log: debug.IDebugger = debug("app:auth-service");
+
+type JwtData = {
+  userId: number, 
+  email: string
+}
 class AuthService {
   salt: crypto.KeyObject = {} as crypto.KeyObject;
 
@@ -33,17 +38,16 @@ class AuthService {
     return this.salt.export();
   }
 
-  generateAndGetJwtToken(requestBody: LoginUserDto, jwtSecret: string) {
+  generateAndGetJwtToken(requestBody: JwtData, jwtSecret: string) {
     return jwt.sign(requestBody, jwtSecret, {
       expiresIn: tokenExpiry,
     });
   }
 
-  generateLoginResponse(reqBody: any, resLocals: any) {
+  generateLoginResponse(reqBody: JwtData) {
     log("reqBody", reqBody, "jwtSecret", jwtSecret);
     const refreshId = reqBody.userId + jwtSecret;
     const hash = this.generateAndGetHash(refreshId);
-    reqBody.refreshKey = this.generateAndGetRefreshKey();
     const token = this.generateAndGetJwtToken(reqBody, jwtSecret);
     return { 
       accessToken: token, 
