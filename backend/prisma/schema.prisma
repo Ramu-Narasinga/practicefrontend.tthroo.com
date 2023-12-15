@@ -14,6 +14,7 @@ model Chapter {
   additionalfiles Json?
   img             String?       @db.VarChar
   unit            String?       @db.VarChar
+  enabled         Boolean?      @default(true)
   steps           Step[]
   userChapters    UserChapter[]
 }

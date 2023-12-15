@@ -161,7 +161,7 @@ function CustomEditor(props: ChapterEditorProps) {
 
 function ChapterEditor(props: ChapterEditorProps) {
 
-  
+  console.log("props.files", props.files);
   
   return (
     <div className="">

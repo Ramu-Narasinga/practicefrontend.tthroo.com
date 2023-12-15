@@ -17,7 +17,7 @@ function Steps(props: { chapterTitle: string, stepTitles: StepType[] }) {
       try {
         const stepContents = await Promise.all(
           Array.from({ length: props.stepTitles.length }, async (_, i) => {
-            const response = await fetch(`/assets/components/Authentication/steps/step-${i + 1}.md`);
+            const response = await fetch(`/assets/components/${props.chapterTitle}/steps/step-${i + 1}.md`);
             const content = await response.text();
             return { description: content };
           })

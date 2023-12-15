@@ -28,11 +28,11 @@ class ChapterController {
       let chapter = await chapterService.getChapterById(chapterId, userId);
       log("fetched chapter successfully:");
 
-      if (!chapter || chapter.length == 0) {
+      if (!chapter) {
         return res.status(404).json({ error: 'Chapter not found' });
       }
 
-      res.status(200).send(chapter[0]);
+      res.status(200).send(chapter);
     } catch (err) {
       log("getChapter error: %O", err);
       return res.status(500).send();

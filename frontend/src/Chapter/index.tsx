@@ -11,12 +11,14 @@ import { sandpackDark } from "@codesandbox/sandpack-themes";
 import "./index.css";
 import Selector from './Steps/Selector';
 import { Toaster } from 'react-hot-toast';
+import Button from '../Shared/Button';
 
 
 function Chapter() {
   const { chapterId } = useParams();
   const [chapter, setChapter] = useState<ChapterType>({} as ChapterType);
   const [files, setFiles] = useState<SandpackFiles>({} as SandpackFiles);
+  const [revealSteps, setRevealSteps] = useState(false);
 
   useEffect(() => {
     // Fetch chapter data when the component mounts
@@ -29,8 +31,10 @@ function Chapter() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setChapter(data.chapter);
-        setFiles({...data?.chapter?.additionalfiles, ...data?.files});
+        setChapter(data);
+        if (data?.userChapters && data?.userChapters[0]) {
+          setFiles({...data?.additionalfiles, ...data?.userChapters[0].files});
+        }
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, [chapterId]);
@@ -50,7 +54,25 @@ function Chapter() {
       <Header title={chapter.title} unit={`${chapter?.unit?.title} / `} unitId={chapter.unitId} />
       <div className="flex flex-row bg-gray-100">
         <div className="pt-4 w-1/4 sidebar-container overflow-y-scroll">
-          {chapter?.steps?.length > 0 && <Steps chapterTitle={chapter?.title} stepTitles={chapter?.steps} />}
+          {revealSteps && chapter?.steps?.length > 0 && <Steps chapterTitle={chapter?.title} stepTitles={chapter?.steps} />}
+          {
+            !revealSteps && 
+            <div className='text-center'>
+              <h1 className='text-lg mb-4'>Build the component:</h1>
+              <a href={`${chapter.img}`} target="_blank">
+                <img className="w-80 mx-auto my-0 cursor-pointer mb-4" src={`/assets/components/${chapter.title}/img.png`} />
+              </a>
+              <p className='mb-4'>
+                Click the above image to view the final result. Try to build it yourself first. (<i>We are working hard to provide Figma design files soon</i>)
+              </p>
+
+              <p className='mb-4'>
+                if you are stuck or need help
+              </p>
+
+              <Button label="Follow tutorial" onClick={() => setRevealSteps(true)} />
+            </div>
+          }
         </div>
         <div className="w-3/4 h-full">
           {

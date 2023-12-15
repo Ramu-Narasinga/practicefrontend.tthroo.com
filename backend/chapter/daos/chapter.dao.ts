@@ -20,31 +20,32 @@ class ChapterDao {
   async getChapters(unit: string) {
     return await this.prisma.chapter.findMany({
       where: {
-        unit
+        unit,
+        enabled: true
       }
     });
   }
 
   async getChapterById(chapterId: number, userId: number) {
-    // return await this.prisma.chapter.findUnique({
-    //   where: {
-    //     id: chapterId,
-    //   },
-    //   include: {
-    //     steps: true,
-    //     userChapters: true
-    //   }
-    // });
-    return await this.prisma.userChapter.findMany({
+    return await this.prisma.chapter.findUnique({
       where: {
-        user_id: userId,
-        chapter_id: chapterId,
+        id: chapterId,
       },
       include: {
-        // Include any related fields you want in the result
-        chapter: true,
-      },
+        steps: true,
+        userChapters: true
+      }
     });
+    // return await this.prisma.userChapter.findMany({
+    //   where: {
+    //     user_id: userId,
+    //     chapter_id: chapterId,
+    //   },
+    //   include: {
+    //     // Include any related fields you want in the result
+    //     chapter: true,
+    //   },
+    // });
   }
 
   async saveChapterById(chapterId: number, userId: number, data: ChapterSave) {

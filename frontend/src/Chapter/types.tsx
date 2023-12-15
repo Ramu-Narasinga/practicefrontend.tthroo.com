@@ -7,6 +7,7 @@ export type ChapterType = {
   "title": string,
   "description": string,
   "unitId": number,
+  "img": string,
   "unit": {
     "title": string
   }
