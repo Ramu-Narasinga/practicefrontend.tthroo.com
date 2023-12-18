@@ -58,18 +58,25 @@ function Chapter() {
           {
             !revealSteps && 
             <div className='text-center'>
-              <h1 className='text-lg mb-4'>Build the component:</h1>
-              <a href={`${chapter.img}`} target="_blank">
+
+              <h1 className='text-lg mb-4 underline'>Build the component:</h1>
+              <a href={`/assets/components/${chapter.title}/${chapter.title}.fig`} download>
                 <img className="w-80 mx-auto my-0 cursor-pointer mb-4" src={`/assets/components/${chapter.title}/img.png`} />
               </a>
-              <p className='mb-4'>
-                Click the above image to view the final result. Try to build it yourself first. (<i>We are working hard to provide Figma design files soon</i>)
-              </p>
+              <h1 className='text-lg mb-4 underline'>Set up instructions:</h1>
+              <div className='text-left w-80 mx-auto my-0'>
+                <p className='mb-2'>
+                  1. <a className="text-violet-700 underline cursor-pointer" href={`/assets/components/${chapter.title}/${chapter.title}.fig`} download>Download the figma design file</a> for this component
+                </p>
+                <p className='mb-2'>
+                  2. Login into your Figma account and import this download file
+                </p>
+                <p className='mb-4'>
+                  3. Start building the component. Happy hacking! :)
+                </p>
+              </div>
 
-              <p className='mb-4'>
-                if you are stuck or need help
-              </p>
-
+              <h1 className='text-lg mb-4 underline'>Stuck or need help?</h1>
               <Button label="Follow tutorial" onClick={() => setRevealSteps(true)} />
             </div>
           }
