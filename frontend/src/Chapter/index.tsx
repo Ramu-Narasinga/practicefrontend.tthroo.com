@@ -83,8 +83,14 @@ function Chapter() {
         </div>
         <div className="w-3/4 h-full">
           {
-            <ChapterEditor files={files && Object.keys(files).length > 0 ? files : {}} />
+            // <ChapterEditor files={files && Object.keys(files).length > 0 ? files : {}} />
           }
+          <iframe src="https://codesandbox.io/p/devbox/drag-and-drop-profile-cards-d64xgx?embed=1"
+            className='w-full h-[calc(100vh-4rem)]'
+            title="drag and drop profile cards"
+            allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+            sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+          ></iframe>
         </div>
       </div>
     </>
