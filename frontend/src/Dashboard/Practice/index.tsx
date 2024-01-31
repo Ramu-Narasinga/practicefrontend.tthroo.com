@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UnitChapters from './UnitChapters';
 import classNames from 'classnames';
+import { Filters } from '../Filters';
 
 function Practice() {
   const [unit, setUnit] = useState("uiComponents");
@@ -14,35 +15,14 @@ function Practice() {
   };
 
   return (
-    <>
-      <div className="flex items-center border-b border-solid border-gray-300 gap-10 px-4 sm:px-6 md:px-8 align-center">
-        <div 
-          className={classNames('text-sm py-4 cursor-pointer', {
-            'border-b-2 border-solid border-violet-700 ': unit === uiComponents
-          })}
-          onClick={() => handleItemClick(uiComponents)}
-        >
-          UI Components
-        </div>
-        <div 
-          className={classNames('text-sm py-4 cursor-pointer', {
-            'border-b-2 border-solid border-violet-700': unit === landingPage
-          })}
-          onClick={() => handleItemClick(landingPage)}
-        >
-          Landing Page
-        </div>
-        <div 
-          className={classNames('text-sm py-4 cursor-pointer', {
-            'border-b-2 border-solid border-violet-700': unit === dashboard
-          })}
-          onClick={() => handleItemClick(dashboard)}
-        >
-          Dashboard
-        </div>
+    <div className='flex'>
+      <div className='w-1/4'>
+        <Filters />
       </div>
-      <UnitChapters unit={unit} />
-    </>
+      <div className='w-3/4'>
+        <UnitChapters unit={unit} />
+      </div>
+    </div>
   );
 }
 
