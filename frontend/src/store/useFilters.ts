@@ -1,5 +1,10 @@
 import { create } from 'zustand'
 
+export type CategoryType = {
+    label: string;
+    checked: boolean;
+}
+
 const initialState = {
     categories: [
         {
@@ -16,12 +21,24 @@ const initialState = {
             checked: false
         }
     ],
-    technologies: [
+    cssFrameworks: [
         {
-            label: "React",
+            label: "Vanilla",
+            checked: false
+        }, {
+            label: "Bootstrap",
             checked: false
         }, {
             label: "Tailwind",
+            checked: false
+        }
+    ],
+    componentLibraries: [
+        {
+            label: "Shadcn/ui",
+            checked: false
+        }, {
+            label: "Mantine",
             checked: false
         }
     ]

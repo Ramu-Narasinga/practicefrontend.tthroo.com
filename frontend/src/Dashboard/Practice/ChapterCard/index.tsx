@@ -8,7 +8,7 @@ function ChapterCard(props: { chapter: ChapterCardType }) {
   const { chapter } = props;
 
   return (
-    <div className="flex flex-col justify-between max-w-sm h-fit-content bg-white rounded-lg border border-gray-300 text-left">
+    <div className="flex flex-col justify-between max-w-xs h-fit-content bg-white rounded-lg border border-gray-300 text-left">
       <div>
         <Link to={`/chapter/${chapter.id}`}>
           <img src={`/assets/components/${chapter.title}/img.png`} alt="chapter" />
